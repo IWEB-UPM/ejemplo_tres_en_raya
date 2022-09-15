@@ -3,6 +3,8 @@ import Header from './Header';
 import Board from './Board';
 import Reset from './Reset';
 import { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const PLAYERX = "Player 1 - Xs";
 const PLAYER0 = "Player 2 - 0s";
