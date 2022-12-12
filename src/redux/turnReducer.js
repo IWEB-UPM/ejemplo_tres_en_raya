@@ -1,16 +1,15 @@
 import {PLAYERX, PLAYER0} from '../constants/constants';
 
-function turnReducer(state = PLAYERX, action) {
+
+export default function turnReducer(state = PLAYERX, action) {
     switch (action.type) {
-    case 'PLAY_POSITION':
-        return action.turn === PLAYERX ? PLAYER0 : PLAYERX;
-    case 'RESET':
-          return PLAYERX;
-    case 'FETCH_DATA':
-          return action.turn;
-    default:
-        return state;
+        case "FETCH_DATA_SUCCESS":
+            return action.payload.turn;
+        case "PLAY_POSITION":
+            return action.payload.turn === PLAYERX ? PLAYER0 : PLAYERX;
+        case "RESET":
+            return PLAYERX;
+        default:
+            return state;
     }
 }
-
-export default turnReducer;

@@ -4,12 +4,16 @@ import Board from './Board';
 import Reset from './Reset';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { playPosition, reset, fetchDataAction } from './redux/actions';
+import { playPosition, reset } from './redux/actions';
 
+
+const PLAYERX = "Player 1 - Xs";
+const PLAYER0 = "Player 2 - 0s";
 const MYURL = "https://api.npoint.io/c734e05e43c5b87dd971";
 
-function App(props) {
-  
+
+function App(props) {  
+
   useEffect(() => {
     // Update the document title using the browser API
     document.title = `Turn of ${props.turn}`;
@@ -20,15 +24,14 @@ function App(props) {
       const res = await fetch(MYURL);
       const myjson = await res.json();
       console.log(myjson);
-      props.dispatch(fetchDataAction(myjson.moves, myjson.turn, myjson.values));
+      props.dispatch({ type: "FETCH_DATA_SUCCESS", payload: myjson });
     }
 
     fetchData();
   }, []);
 
   function appClick(rowNumber, columnNumber){
-    console.log("CLICK en: ", rowNumber, columnNumber);
-    props.dispatch(playPosition(rowNumber,columnNumber,props.turn, props.values))
+    props.dispatch(playPosition({row: rowNumber, column: columnNumber, turn: props.turn}));
   }
 
   function resetClick(){
@@ -50,5 +53,5 @@ function App(props) {
 function mapStateToProps(state) {
   return { ...state };
 }
-
 export default connect(mapStateToProps)(App);
+

@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import gameReducer from './gameReducer';
+import valuesReducer from './valuesReducer';
 import turnReducer from './turnReducer';
 import movesReducer from './movesReducer';
 
+
 const GlobalState = combineReducers({
+    values: valuesReducer,
     turn: turnReducer,
-    values: gameReducer,
-    moves: movesReducer,
+    moves: movesReducer
 });
 
 export default GlobalState;
